@@ -1,4 +1,3 @@
-import './defaultLayout.css';
 import { useStateContext } from "../../contexts/ContextProvider";
 import { Link, Navigate, Outlet } from "react-router-dom"
 import { useEffect } from 'react';

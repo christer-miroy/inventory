@@ -6,6 +6,8 @@ import Users from "./pages/Users";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import UserForm from "./pages/UserForm";
+import UserProfile from "./pages/UserProfile";
 
 const router = createBrowserRouter([
     {
@@ -23,6 +25,18 @@ const router = createBrowserRouter([
             {
                 path: "/users",
                 element: <Users />
+            },
+            {
+                path: "/users/new",
+                element: <UserForm key="userCreate" />
+            },
+            {
+                path: "/users/:id",
+                element: <UserForm key="userUpdate" />
+            },
+            {
+                path: "/users/profile/:id",
+                element: <UserProfile />
             }
         ]
     },
