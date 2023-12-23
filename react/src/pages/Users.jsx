@@ -28,9 +28,15 @@ const Users = () => {
         })
     }
 
-    const onDelete = (e) => {
-        e.preventDefault();
-        console.log("Delete");
+    const onDelete = (u) => {
+        if (!window.confirm(`Are you sure you want to delete this user?`)) {
+            return;
+        }
+
+        axiosClient.delete(`/users/${u.id}`)
+        .then(() => {
+            getUsers();
+        })
     }
 
     const handlePageChange = (page) => {
@@ -67,7 +73,7 @@ const Users = () => {
                     <Link to={`/users/${u.id}`} className="btn-edit">
                       Edit
                     </Link>&nbsp;
-                    <button onClick={onDelete} className="btn-delete">Delete</button>
+                    <button onClick={ev => onDelete(u)} className="btn-delete">Delete</button>
                   </td>
                 </tr>
               ))
