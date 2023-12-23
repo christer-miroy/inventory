@@ -28,8 +28,9 @@
 #defaultLayout header {
     height: 80px;
     padding: 2rem 3rem;
-    background-color: white;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    background-color: rgb(114, 40, 241);
+    color: white;
+    box-shadow: 1px 1px 2px rgb(248, 247, 247);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -37,31 +38,47 @@
 
 #defaultLayout main {
     padding: 2rem;
+    color: white;
 }
 
-#defaultLayout header {
-    height: 80px;
-    padding: 2rem 3rem;
-    background-color: white;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.animated {
+    -webkit-animation-duration: 0.3s;
+    animation-duration: 0.3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
 }
 
-#defaultLayout main {
-    padding: 2rem;
+.fadeInDown {
+    -webkit-animation-name: fadeInDown;
+    animation-name: fadeInDown;
 }
 
-
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 .btn-logout {
     text-decoration: none;
     padding: 0.75rem 1.5rem;
-    color: #212121;
+    color: white;
     transition: all 0.3s;
     border-radius: 6px;
+    margin-left: 15px;
 }
 .btn-logout:hover {
     background-color: rgba(0, 0, 0, 0.1);
+}
+
+.alert {
+    padding: 1rem;
+    color: #ff4040;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
 }

@@ -23,8 +23,10 @@ const DefaultLayout = () => {
         <div className="content">
             <header>
                 <div>Header</div>
-                <div>Hello, {user.username}!</div>
-                <a href="#" className="btn-logout" onClick={onLogout}>Logout</a>
+                <div>
+                    Hello, {user.username}!
+                    <a href="#" className="btn-logout" onClick={onLogout}>Logout</a>
+                </div>
             </header>
             <main>
                 <Outlet />
