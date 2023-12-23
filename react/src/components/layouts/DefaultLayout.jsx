@@ -1,5 +1,6 @@
+import './defaultLayout.css';
 import { useStateContext } from "../../contexts/ContextProvider";
-import { Navigate, Outlet } from "react-router-dom"
+import { Link, Navigate, Outlet } from "react-router-dom"
 
 const DefaultLayout = () => {
     const { user, token } =useStateContext();
@@ -8,9 +9,27 @@ const DefaultLayout = () => {
         return <Navigate to="/login" />
     }
 
+    const onLogout = (e) => {
+        e.preventDefault();
+        console.log("onLogout");
+    }
+
   return (
-    <div>
-        <Outlet />
+    <div id="defaultLayout">
+        <aside>
+            <Link to="/dashboard">Dashboard</Link>
+            <Link to="/users">Users</Link>
+        </aside>
+        <div className="content">
+            <header>
+                <div>Header</div>
+                <div>Hello, {user.username}!</div>
+                <a href="#" className="btn-logout" onClick={onLogout}>Logout</a>
+            </header>
+            <main>
+                <Outlet />
+            </main>
+        </div>
     </div>
   )
 }
