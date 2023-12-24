@@ -264,6 +264,7 @@ table > tbody > tr > td {
     background: #5b08a7;
     border: 0;
     text-decoration: none;
+    border-radius: 8px;
     padding: 15px;
     color: #FFFFFF;
     font-size: 16px;

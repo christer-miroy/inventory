@@ -59,31 +59,48 @@ const Users = () => {
                     <th>Actions</th>
                 </tr>
             </thead>
-            <tbody>
-            {Array.isArray(users) && users.length > 0 ? (
-              users.map(u => (
-                <tr key={u.id}>
-                  <td>{u.id}</td>
-                  <td>{u.name}</td>
-                  <td>{u.created_at}</td>
-                  <td>
-                    <Link to={`/users/${u.id}`} className="btn-profile">
-                      Profile
-                    </Link>&nbsp;
-                    <Link to={`/users/${u.id}`} className="btn-edit">
-                      Edit
-                    </Link>&nbsp;
-                    <button onClick={ev => onDelete(u)} className="btn-delete">Delete</button>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="3">No users found</td>
-              </tr>
-            )}
-            </tbody>
+            {
+                loading && (
+                    <tbody>
+                        <tr>
+                            <td colSpan={4} className="text-center">
+                                Loading...
+                            </td>
+                        </tr>
+                    </tbody>
+                )
+            }
+            {
+                !loading && (
+                    <tbody>
+                        {Array.isArray(users) && users.length > 0 ? (
+                        users.map(u => (
+                            <tr key={u.id}>
+                            <td>{u.id}</td>
+                            <td>{u.name}</td>
+                            <td>{u.created_at}</td>
+                            <td>
+                                <Link to={`/users/${u.id}`} className="btn-profile">
+                                Profile
+                                </Link>&nbsp;
+                                <Link to={`/users/${u.id}`} className="btn-edit">
+                                Edit
+                                </Link>&nbsp;
+                                <button onClick={ev => onDelete(u)} className="btn-delete">Delete</button>
+                            </td>
+                            </tr>
+                        ))
+                        ) : (
+                        <tr>
+                            <td colSpan="4" className="text-center">No users found</td>
+                        </tr>
+                        )}
+                    </tbody>
+                )
+            }
         </table>
+
+        {/* pagination */}
         {totalPages > 1 && (
             <div className="pagination">
                 <span className="pagination-info">Page {currentPage} of {totalPages}</span>&nbsp;
