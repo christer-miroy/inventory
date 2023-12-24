@@ -80,7 +80,7 @@ const Users = () => {
                             <td>{u.name}</td>
                             <td>{u.created_at}</td>
                             <td>
-                                <Link to={`/users/${u.id}`} className="btn-profile">
+                                <Link to={`/users/profile/${u.id}`} className="btn-profile">
                                 Profile
                                 </Link>&nbsp;
                                 <Link to={`/users/${u.id}`} className="btn-edit">

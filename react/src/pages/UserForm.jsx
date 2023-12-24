@@ -30,7 +30,7 @@ const UserForm = () => {
               navigate('/users');
             })
         }, [])
-      }
+    }
 
     const onSubmit = (e) => {
         e.preventDefault();

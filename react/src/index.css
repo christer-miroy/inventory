@@ -120,6 +120,7 @@ table > tbody > tr > td {
     padding: 1.25rem 1.5rem;
     margin-bottom: 1rem;
     margin-top: 0.5rem;
+    color: black;
 }
 
 .alert {
@@ -272,4 +273,14 @@ table > tbody > tr > td {
     -webkit-transition: all 0.3 ease;
     transition: all 0.3 ease;
     cursor: pointer;
+}
+
+.profile-table {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.profile-table tbody tr td {
+    border: 1px white solid;
 }
