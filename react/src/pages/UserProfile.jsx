@@ -33,19 +33,19 @@ const UserProfile = () => {
                     <table className="profile-table">
                         <tbody>
                             <tr>
-                                <td>Name:</td>
+                                <td><strong>Name:</strong></td>
                                 <td>{user.name}</td>
                             </tr>
                             <tr>
-                                <td>Username:</td>
+                                <td><strong>Username:</strong></td>
                                 <td>{user.username}</td>
                             </tr>
                             <tr>
-                                <td>Email:</td>
+                                <td><strong>Email:</strong></td>
                                 <td>{user.email}</td>
                             </tr>
                             <tr>
-                                <td>Date Created:</td>
+                                <td><strong>Date Created:</strong></td>
                                 <td>{user.created_at}</td>
                             </tr>
                         </tbody>
