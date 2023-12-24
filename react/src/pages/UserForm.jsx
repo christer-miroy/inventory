@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axiosClient from "../axios-client";
 
 const UserForm = () => {
+    const navigate = useNavigate();
     const {id} = useParams();
     const[user, setUser] = useState({
         id: null,
@@ -12,27 +13,46 @@ const UserForm = () => {
         password: '',
         password_confirmation: ''
     });
-    const [loading,setLoading] = useState(true);
     const [errors, setErrors] = useState(null);
 
     if (id) {
         useEffect(() => {
-            setLoading(true);
-            axiosClient.get(`/users/${id}`)
+          axiosClient.get(`/users/${id}`)
             .then(({data}) => {
-                setLoading(false);
-                setUser(data);
+              setUser(data)
             })
-            .catch(err => {
-                setLoading(false);
-                console.log(err);
+            .catch(() => {
+              navigate('/users');
             })
         }, [])
-    }
+      }
 
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log("onSubmit");
+        setErrors(null);
+        if (user.id) {
+            axiosClient.put(`/users/${user.id}`, user)
+            .then(() => {
+                navigate('/users');
+            })
+            .catch(err => {
+                const response = err.response;
+                if (response && response.status === 422) {
+                    setErrors(response.data.errors);
+                }
+            })
+        } else {
+            axiosClient.post(`/users`, user)
+            .then(() => {
+                navigate('/users');
+            })
+            .catch(err => {
+                const response = err.response;
+                if (response && response.status === 422) {
+                    setErrors(response.data.errors);
+                }
+            })
+        }
     }
 
   return (
@@ -41,12 +61,6 @@ const UserForm = () => {
         {!user.id && <h1>Create User</h1>}
 
         <div className="card">
-            {
-                loading && (
-                    <div className="text-center">Loading...</div>
-                )
-            }
-
             {
                 errors && <div className="alert">
                     {
@@ -57,45 +71,43 @@ const UserForm = () => {
                 </div>
             }
 
-            {
-                !loading &&
-                    <form>
-                        <input
-                            type="text"
-                            name="name"
-                            placeholder="Name"
-                            value={user.name}
-                            onChange={e => setUser({...user, name:e.target.value})}
-                        />
-                        <input
-                            type="text"
-                            name="username"
-                            placeholder="Username"
-                            value={user.username}
-                            onChange={e => setUser({...user, username:e.target.value})}
-                        />
-                        <input
-                            type="email"
-                            name="email"
-                            placeholder="Email"
-                            value={user.email}
-                            onChange={e => setUser({...user, email:e.target.value})}
-                        />
-                        <input
-                            type="password"
-                            name="password"
-                            placeholder="Password"
-                            onChange={e => setUser({...user, password:e.target.value})}
-                        />
-                        <input
-                            type="password"
-                            name="password_confirmation"
-                            placeholder="Password Confirmation"
-                            onChange={e => setUser({...user, password_confirmation:e.target.value})}
-                        />
-                        <button className="btn btn-block">Update</button>
-                    </form>
-            }
+            <form onSubmit={onSubmit}>
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Name"
+                    value={user.name}
+                    onChange={e => setUser({...user, name:e.target.value})}
+                />
+                <input
+                    type="text"
+                    name="username"
+                    placeholder="Username"
+                    value={user.username}
+                    onChange={e => setUser({...user, username:e.target.value})}
+                />
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    value={user.email}
+                    onChange={e => setUser({...user, email:e.target.value})}
+                />
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    onChange={e => setUser({...user, password:e.target.value})}
+                />
+                <input
+                    type="password"
+                    name="password_confirmation"
+                    placeholder="Password Confirmation"
+                    onChange={e => setUser({...user, password_confirmation:e.target.value})}
+                />
+                {user.id && <button className="btn btn-block">Update</button>}
+                {!user.id && <button className="btn btn-block">Save</button>}
+            </form>
 
         </div>
     </>
