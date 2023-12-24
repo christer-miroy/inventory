@@ -90,6 +90,7 @@ input:focus {
 
 .text-center {
     text-align: center;
+    color: black;
 }
 
 table {
