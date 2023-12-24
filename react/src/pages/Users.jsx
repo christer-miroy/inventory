@@ -49,7 +49,7 @@ const Users = () => {
         <h1>Users</h1>
         <Link to="/users/new" className="btn-add">New User</Link>
       </div>
-      <div className="card animated fadeInDown">
+      <div className="card">
         <table>
             <thead>
                 <tr>

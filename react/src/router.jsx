@@ -8,6 +8,8 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import UserForm from "./pages/UserForm";
 import UserProfile from "./pages/UserProfile";
+import Products from "./pages/Products";
+import ProductForm from "./pages/ProductForm";
 
 const router = createBrowserRouter([
     {
@@ -37,7 +39,19 @@ const router = createBrowserRouter([
             {
                 path: "/users/profile/:id",
                 element: <UserProfile />
-            }
+            },
+            {
+                path: "/products",
+                element: <Products />
+            },
+            {
+                path: "/Products/new",
+                element: <ProductForm key="productCreate" />
+            },
+            {
+                path: "/Products/:id",
+                element: <ProductForm key="productUpdate" />
+            },
         ]
     },
     {
